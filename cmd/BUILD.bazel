@@ -1,0 +1,46 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "cmd_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/r0bobo/aspect-cli-issue-760-reproduce/cmd",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@com_github_adrg_xdg//:xdg",
+        "@com_github_azure_azure_sdk_for_go_sdk_azidentity//:azidentity",
+        "@com_github_azure_azure_sdk_for_go_sdk_storage_azblob//:azblob",
+        "@com_github_burntsushi_toml//:toml",
+        "@com_github_cenkalti_backoff//:backoff",
+        "@com_github_clickhouse_clickhouse_go_v2//:clickhouse-go",
+        "@com_github_dustin_go_humanize//:go-humanize",
+        "@com_github_emicklei_proto//:proto",
+        "@com_github_go_stack_stack//:stack",
+        "@com_github_golang_migrate_migrate_v4//:migrate",
+        "@com_github_gomicro_postal//:postal",
+        "@com_github_google_gofuzz//:gofuzz",
+        "@com_github_google_uuid//:uuid",
+        "@com_github_gorilla_mux//:mux",
+        "@com_github_hablullah_go_hijri//:go-hijri",
+        "@com_github_hashicorp_go_multierror//:go-multierror",
+        "@com_github_hmarr_codeowners//:codeowners",
+        "@com_github_iancoleman_strcase//:strcase",
+        "@com_github_ibm_sarama//:sarama",
+        "@com_github_spf13_cobra//:cobra",
+        "@com_google_cloud_go//:go",
+        "@com_google_cloud_go_bigquery//:bigquery",
+        "@com_google_cloud_go_cloudsqlconn//:cloudsqlconn",
+        "@com_google_cloud_go_compute_metadata//:metadata",
+        "@com_google_cloud_go_container//:container",
+        "@com_google_cloud_go_datastore//:datastore",
+        "@com_google_cloud_go_logging//:logging",
+        "@com_google_cloud_go_profiler//:profiler",
+        "@com_google_cloud_go_pubsub//:pubsub",
+        "@com_google_cloud_go_storage//:storage",
+    ],
+)
+
+go_binary(
+    name = "cmd",
+    embed = [":cmd_lib"],
+    visibility = ["//visibility:public"],
+)
